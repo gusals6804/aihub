@@ -1,9 +1,11 @@
 # 노트북 서버 운영
 
+간편 실행: `npm run local` 또는 Windows `local-windows.cmd`. 기본 포트는 5000이며 실행 후 같은 네트워크용 주소를 표시합니다.
+
 1. Node.js 24 LTS를 설치합니다.
 2. 저장소에서 `npm run setup`, `npm run build`를 실행합니다.
-3. `npm run start -- --hostname 0.0.0.0 --port 3000`으로 서버를 시작합니다.
-4. 같은 네트워크의 PC·모바일에서 `http://노트북의사설IP:3000`으로 접속합니다. 네트워크 프로필에 맞게 방화벽 접근을 허용하세요.
+3. `npm run start -- --hostname 0.0.0.0 --port 5000`으로 서버를 시작합니다.
+4. 같은 네트워크의 PC·모바일에서 `http://노트북의사설IP:5000`으로 접속합니다. 네트워크 프로필에 맞게 방화벽 접근을 허용하세요.
 
 Windows에서는 `powershell -File scripts/start-windows.ps1`을 사용할 수 있습니다. 개발 모드는 `-Dev`입니다. 노트북 절전·전원 종료 시 서버도 중단됩니다.
 

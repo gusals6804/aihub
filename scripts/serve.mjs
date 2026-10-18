@@ -1,11 +1,12 @@
 import http from "node:http";
 import next from "next";
+import { networkInterfaces } from "node:os";
 const args = process.argv.slice(2);
 const option = (name, fallback) => {
   const i = args.indexOf(name);
   return i >= 0 ? args[i + 1] : fallback;
 };
-const port = Number(option("--port", args.find((a) => /^\d+$/.test(a)) || "3000"));
+const port = Number(option("--port", args.find((a) => /^\d+$/.test(a)) || "5000"));
 const hostname = option("--hostname", "0.0.0.0");
 // Only this HTTP entrypoint supplies the socket-derived IP header.
 // Incoming values are always replaced, so clients cannot spoof it.
@@ -29,7 +30,31 @@ const server = http.createServer((req, res) => {
 });
 server.requestTimeout = 45000;
 server.headersTimeout = 15000;
-server.listen(port, hostname, () => console.log(`Agent Hub listening on ${hostname}:${port}`));
+server.on("error", (error) => {
+  console.error(
+    error.code === "EADDRINUSE"
+      ? `${port}번 포트가 사용 중입니다. 기존 서버를 종료한 후 다시 실행하세요.`
+      : error.message,
+  );
+  process.exit(1);
+});
+server.listen(port, hostname, () => {
+  console.log(`Agent Hub listening on ${hostname}:${port}`);
+  if (hostname === "0.0.0.0") {
+    console.log(`내 컴퓨터: http://localhost:${port}`);
+    const addresses = [
+      ...new Set(
+        Object.values(networkInterfaces())
+          .flat()
+          .filter((item) => item?.family === "IPv4" && !item.internal)
+          .map((item) => item.address),
+      ),
+    ];
+    for (const address of addresses)
+      console.log(`같은 네트워크에서 공유: http://${address}:${port}`);
+    console.log("다른 기기도 같은 Wi-Fi/사내망에 연결되어 있어야 합니다. Ctrl+C로 종료합니다.");
+  }
+});
 let stopping = false;
 for (const signal of ["SIGINT", "SIGTERM"])
   process.on(signal, () => {

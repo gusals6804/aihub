@@ -7,7 +7,7 @@
     "dev:lan": "next dev --hostname 0.0.0.0",
     "build": "next build",
     "start": "node scripts/serve.mjs",
-    "start:lan": "node scripts/serve.mjs --hostname 0.0.0.0 --port 3000",
+    "start:lan": "node scripts/serve.mjs --hostname 0.0.0.0 --port 5000",
     "lint": "eslint .",
     "format": "prettier --write .",
     "typecheck": "next typegen && tsc --noEmit",
@@ -20,7 +20,8 @@
     "db:reset": "prisma migrate reset --force",
     "setup": "node scripts/setup.mjs",
     "test:restart": "node scripts/restart-check.mjs",
-    "share": "node scripts/share.mjs"
+    "share": "node scripts/share.mjs",
+    "local": "node scripts/local.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.111.0",
