@@ -1,0 +1,5 @@
+*.pdf binary
+*.woff2 binary
+# Preserve generated migration output and the upstream font license verbatim.
+prisma/migrations/** -whitespace
+public/fonts/LICENSE.txt -whitespace

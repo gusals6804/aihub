@@ -1,0 +1,77 @@
+import "server-only";
+import sanitize from "sanitize-html";
+// Scripts, navigation, active SVG, event handlers and embeds are never trusted.
+export function isolateHtml(input: string) {
+  return sanitize(input, {
+    allowedTags: [
+      "html",
+      "head",
+      "body",
+      "title",
+      "style",
+      "div",
+      "span",
+      "p",
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6",
+      "section",
+      "article",
+      "header",
+      "footer",
+      "main",
+      "aside",
+      "nav",
+      "ul",
+      "ol",
+      "li",
+      "table",
+      "thead",
+      "tbody",
+      "tr",
+      "th",
+      "td",
+      "caption",
+      "br",
+      "hr",
+      "strong",
+      "em",
+      "b",
+      "i",
+      "u",
+      "small",
+      "pre",
+      "code",
+      "blockquote",
+      "img",
+      "figure",
+      "figcaption",
+      "label",
+      "button",
+      "details",
+      "summary",
+    ],
+    allowedAttributes: {
+      "*": ["class", "id", "style", "aria-label"],
+      img: ["src", "alt", "width", "height"],
+      th: ["colspan", "rowspan"],
+      td: ["colspan", "rowspan"],
+      button: ["type", "disabled"],
+    },
+    allowedSchemes: ["data"],
+    allowedSchemesByTag: { img: ["data"] },
+    allowVulnerableTags: true, // CSS is isolated by response CSP. Scripts stay blocked.
+    transformTags: {
+      img: (tagName, attribs) => ({
+        tagName,
+        attribs: /^data:image\/(png|jpeg|gif|webp);base64,/i.test(attribs.src || "")
+          ? attribs
+          : { alt: attribs.alt || "외부 이미지 차단" },
+      }),
+      button: (tagName, attribs) => ({ tagName, attribs: { ...attribs, type: "button" } }),
+    },
+  });
+}

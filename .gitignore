@@ -43,3 +43,10 @@ next-env.d.ts
 /src/generated/prisma
 
 tests/e2e/.auth/
+
+# Anonymous runtime data (legacy dev.db is intentionally preserved)
+/storage/
+/test-results/
+/playwright-report/
+/artifacts/
+/.cache/

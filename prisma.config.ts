@@ -2,6 +2,7 @@
 // npm install --save-dev prisma dotenv
 import "dotenv/config";
 import { defineConfig } from "prisma/config";
+import { resolve } from "node:path";
 
 export default defineConfig({
   schema: "prisma/schema.prisma",
@@ -9,6 +10,7 @@ export default defineConfig({
     path: "prisma/migrations",
   },
   datasource: {
-    url: process.env["DATABASE_URL"],
+    // Preserve the legacy dev.db; this version has a separate anonymous data store.
+    url: process.env.HUB_DATABASE_URL || `file:${resolve("storage/agent-hub.db")}`,
   },
 });
