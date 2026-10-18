@@ -7,7 +7,7 @@
     "dev:lan": "next dev --hostname 0.0.0.0",
     "build": "next build",
     "start": "node scripts/serve.mjs",
-    "start:lan": "node scripts/serve.mjs --hostname 0.0.0.0 --port 5000",
+    "start:lan": "node scripts/serve.mjs --hostname 0.0.0.0 --port 3000",
     "lint": "eslint .",
     "format": "prettier --write .",
     "typecheck": "next typegen && tsc --noEmit",

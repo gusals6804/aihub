@@ -139,7 +139,7 @@ try {
   if (!existsSync(".next/BUILD_ID"))
     throw new Error("프로덕션 빌드가 없습니다. npm run build를 먼저 실행하세요.");
   const index = args.indexOf("--port");
-  const first = index >= 0 ? Number(args[index + 1]) : 5000;
+  const first = index >= 0 ? Number(args[index + 1]) : 3000;
   if (!Number.isInteger(first) || first < 1024 || first > 65515)
     throw new Error("포트는 1024~65515 범위의 숫자여야 합니다.");
   const port = await freePort(first);

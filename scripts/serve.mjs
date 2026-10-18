@@ -6,7 +6,7 @@ const option = (name, fallback) => {
   const i = args.indexOf(name);
   return i >= 0 ? args[i + 1] : fallback;
 };
-const port = Number(option("--port", args.find((a) => /^\d+$/.test(a)) || "5000"));
+const port = Number(option("--port", args.find((a) => /^\d+$/.test(a)) || "3000"));
 const hostname = option("--hostname", "0.0.0.0");
 // Only this HTTP entrypoint supplies the socket-derived IP header.
 // Incoming values are always replaced, so clients cannot spoof it.

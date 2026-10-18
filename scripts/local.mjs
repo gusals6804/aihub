@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 process.chdir(resolve(dirname(fileURLToPath(import.meta.url)), ".."));
 const args = process.argv.slice(2);
 const index = args.indexOf("--port");
-const port = index < 0 ? 5000 : Number(args[index + 1]);
+const port = index < 0 ? 3000 : Number(args[index + 1]);
 if (!Number.isInteger(port) || port < 1024 || port > 65535)
   throw new Error("포트는 1024~65535 범위여야 합니다.");
 const npm = process.platform === "win32" ? "npm.cmd" : "npm";

@@ -16,7 +16,7 @@ winget install --id Cloudflare.cloudflared --exact
 npm run share
 ```
 
-Windows에서는 `share-windows.cmd`를 더블클릭해도 됩니다. 첫 실행은 의존성 설치·DB 준비·빌드 때문에 시간이 걸립니다. 기존 `.env`·DB·터널 설정은 덮어쓰지 않습니다. 기본 5000번 포트가 사용 중이면 다음 빈 로컬 포트를 사용해 새 앱 프로세스를 실행합니다. 다른 포트를 원하면 `npm run share -- --port 3300`처럼 지정합니다.
+Windows에서는 `share-windows.cmd`를 더블클릭해도 됩니다. 첫 실행은 의존성 설치·DB 준비·빌드 때문에 시간이 걸립니다. 기존 `.env`·DB·터널 설정은 덮어쓰지 않습니다. 기본 3000번 포트가 사용 중이면 다음 빈 로컬 포트를 사용해 새 앱 프로세스를 실행합니다. 다른 포트를 원하면 `npm run share -- --port 3300`처럼 지정합니다.
 
 3. 터미널의 **공유 주소:** 뒤에 실제로 출력되는 `https://…trycloudflare.com` 주소를 복사해 전달합니다. 미리 정해진 주소가 아니며 실행할 때 Cloudflare가 새 주소를 발급합니다.
 
